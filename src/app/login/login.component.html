@@ -1,0 +1,35 @@
+<form>
+  <div [ngClass]="['input-area', 'input-area--mb']">
+    <label class="input-label">
+      <input class="input-field"
+             #emailControl="ngModel"
+             required
+             type="text"
+             name="email"
+             placeholder="&nbsp;"
+             [(ngModel)]="email"
+             ngpHover
+             ngpEmailValidator
+             color="green"
+      >
+      <span class="input-label-text">Email</span>
+    </label>
+  </div>
+  <span>{{emailControl.errors | json}}</span>
+
+  <div [ngClass]="['input-area', 'input-area--mb']">
+    <label class="input-label">
+      <input class="input-field"
+             required
+             type="password"
+             name="password"
+             placeholder="&nbsp;"
+             [(ngModel)]="password"
+      >
+      <span class="input-label-text">Password</span>
+    </label>
+  </div>
+  <div>
+    <button mat-raised-button color="primary" (click)="Login()">Login</button>
+  </div>
+</form>

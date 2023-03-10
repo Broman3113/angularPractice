@@ -1,5 +1,7 @@
 <p>This is a {{roomName}}</p>
-<p>Downloaded: {{percentDone}}</p>
+<p>Downloaded:
+  <mat-progress-spinner value="{{percentDone / 1071472 * 100}}"></mat-progress-spinner>
+</p>
 <button (click)="decreaseRoomsCount()">-1</button>
 <button (click)="increaseRoomsCount()">+1</button>
 <button (click)="onAddRoom()">Add room</button>
@@ -7,9 +9,17 @@
 <button (click)="deleteRoom()">Delete room</button>
 <p>{{getError$ | async}}</p>
 <p>Rooms count: {{roomsCount$ | async}}</p>
-<div *ngIf="roomsList2$ | async as roomsList">
-  <ngp-rooms-list [rooms]="roomsList" (roomSelected)="roomSelected($event)" [roomsCount]="roomsCount"></ngp-rooms-list>
+<!--<div *ngIf="roomsList2$ | async as roomsList">-->
+<!--  <ngp-rooms-list [rooms]="roomsList" (roomSelected)="roomSelected($event)" [roomsCount]="roomsCount"></ngp-rooms-list>-->
+<!--</div>-->
+<mat-form-field class="example-full-width">
+  <mat-label>Filter Price</mat-label>
+  <input matInput placeholder="5000" [formControl]="priceFilter" type="number" >
+</mat-form-field>
+<div *ngIf="roomsList">
+  <ngp-rooms-list [rooms]="roomsList" [price]="priceFilter.value" (roomSelected)="roomSelected($event)" [roomsCount]="roomsCount"></ngp-rooms-list>
 </div>
+<router-outlet></router-outlet>
 <ngp-header></ngp-header>
 <ngp-header></ngp-header>
 <ngp-header></ngp-header>

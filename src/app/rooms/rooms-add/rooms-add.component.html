@@ -1,0 +1,120 @@
+{{room | json}}
+
+<form class="form" (ngSubmit)="addRoom(roomsForm)" #roomsForm="ngForm">
+  <div [ngClass]="['input-area', 'input-area--mb']">
+    <label class="input-label">
+      <input class="input-field"
+             required
+             type="text"
+             name="roomType"
+             placeholder="&nbsp;"
+             [(ngModel)]="room.roomType"
+      >
+      <span class="input-label-text">Room type</span>
+    </label>
+  </div>
+
+  <div [ngClass]="['input-area', 'input-area--mb']">
+    <label class="input-label">
+      <input class="input-field"
+             #amenities="ngModel"
+             required
+             type="text"
+             name="amenities"
+             minlength="5"
+             maxlength="20"
+             placeholder="&nbsp;"
+             [(ngModel)]="room.amenities"
+      >
+      <span class="input-label-text">Amenities</span>
+    </label>
+    <span *ngIf="amenities.invalid && !amenities.pristine" class="input-error-text">
+      <span *ngIf="amenities.errors?.['required']">
+        Amenities is required.
+      </span>
+      <span *ngIf="amenities.errors?.['minlength']">
+        Amenities must be at least 5 characters long.
+      </span>
+      <span *ngIf="amenities.errors?.['maxlength']">
+        Amenities must be at most 20 characters long.
+      </span>
+    </span>
+  </div>
+
+  <div [ngClass]="['input-area', 'input-area--mb']">
+    <label class="input-label">
+      <input class="input-field"
+             required
+             type="number"
+             name="price"
+             placeholder="&nbsp;"
+             [(ngModel)]="room.price"
+             [ngModelOptions]="{updateOn: 'blur'}"
+      >
+      <span class="input-label-text">Room price per night</span>
+    </label>
+  </div>
+
+  <div [ngClass]="['input-area', 'input-area--mb']">
+    <label class="input-label">
+      <input class="input-field"
+             required
+             type="text"
+             name="photos"
+             placeholder="&nbsp;"
+             [(ngModel)]="room.photos"
+      >
+      <span class="input-label-text">Photos (Provide link)</span>
+    </label>
+  </div>
+
+  <div [ngClass]="['input-area', 'input-area--mb']">
+    <label class="input-label">
+      <input class="input-field"
+             required
+             type="date"
+             name="checkinTime"
+             placeholder="&nbsp;"
+             [(ngModel)]="room.checkinTime"
+      >
+      <span class="input-label-text">Check-in Time</span>
+    </label>
+  </div>
+
+  <div [ngClass]="['input-area', 'input-area--mb']">
+    <label class="input-label">
+      <input class="input-field"
+             required
+             type="date"
+             name="checkoutTIme"
+             placeholder="&nbsp;"
+             [(ngModel)]="room.checkoutTime"
+      >
+      <span class="input-label-text">Check-out Time</span>
+    </label>
+  </div>
+
+  <div [ngClass]="['input-area', 'input-area--mb']">
+    <label class="input-label">
+      <input class="input-field"
+             required
+             type="number"
+             name="rating"
+             placeholder="&nbsp;"
+             [(ngModel)]="room.rating"
+             min="1"
+             max="5"
+      >
+      <span class="input-label-text">Rating</span>
+    </label>
+  </div>
+
+  <!--  <ngp-input class="input-area&#45;&#45;mb" type="text" label="Room type" name="roomType"></ngp-input>-->
+  <!--  <ngp-input class="input-area&#45;&#45;mb" type="text" label="Amenities" name="amenities"></ngp-input>-->
+  <!--  <ngp-input class="input-area&#45;&#45;mb" type="number" label="Room price per night" name="price"></ngp-input>-->
+  <!--  <ngp-input class="input-area&#45;&#45;mb" type="text" label="Photos (Provide link)" name="photos"></ngp-input>-->
+  <!--  <ngp-input class="input-area&#45;&#45;mb" type="datetime" label="Check-in Time" name="checkinTime"></ngp-input>-->
+  <!--  <ngp-input class="input-area&#45;&#45;mb" type="datetime" label="Check-out Time" name="checkoutTIme"></ngp-input>-->
+  <!--  <ngp-input class="input-area&#45;&#45;mb" type="number" label="Rating" name="rating"></ngp-input>-->
+  <button type="submit" mat-raised-button color="primary" [disabled]="roomsForm.invalid">Submit</button>
+</form>

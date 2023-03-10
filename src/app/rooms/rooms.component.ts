@@ -4,6 +4,8 @@ import {HeaderComponent} from "../header/header.component";
 import {RoomsService} from "./services/rooms.service";
 import {catchError, map, Observable, of, Subject, Subscription} from "rxjs";
 import {HttpEventType} from "@angular/common/http";
+import {ConfigService} from "../services/config.service";
+import {FormControl} from "@angular/forms";
 
 @Component({
   selector: 'ngp-rooms',
@@ -13,6 +15,7 @@ import {HttpEventType} from "@angular/common/http";
 export class RoomsComponent implements OnInit, OnDestroy {
   @ViewChild(HeaderComponent) headerComponent: HeaderComponent | undefined;
   @ViewChildren(HeaderComponent) headerComponents!: QueryList<HeaderComponent>
+  priceFilter = new FormControl(null);
   roomName = 'Living Room';
   roomsCount = 3;
   isCountVisible = true;
@@ -49,10 +52,14 @@ export class RoomsComponent implements OnInit, OnDestroy {
   // ngAfterViewChecked(): void {
   //   this.headerComponent!.title = 'Rooms';
   // }
-  constructor(private roomsService: RoomsService) {
+  constructor(
+    private roomsService: RoomsService,
+    private configService: ConfigService
+    ) {
   }
 
   ngOnInit(): void {
+
     this.subscription = this.roomsService.getRooms$.subscribe(rooms => {
       this.roomsList = rooms;
     })
